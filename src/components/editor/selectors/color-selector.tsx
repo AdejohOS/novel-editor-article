@@ -1,13 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { Check, ChevronDown } from "lucide-react";
 import { EditorBubbleItem, useEditor } from "novel";
 
+import { Button } from "@/components/ui/button";
 import {
-  PopoverTrigger,
   Popover,
   PopoverContent,
+  PopoverTrigger,
 } from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
-
 export interface BubbleColorMenuItem {
   name: string;
   color: string;
@@ -127,25 +127,24 @@ export const ColorSelector = ({ open, onOpenChange }: ColorSelectorProps) => {
 
       <PopoverContent
         sideOffset={5}
-        className="my-1 flex max-h-80 w-48 flex-col overflow-hidden overflow-y-auto rounded border p-1 shadow-xl "
+        className="my-1 flex max-h-80 w-48 flex-col overflow-hidden overflow-y-auto rounded border p-1 shadow-xl"
         align="start"
       >
         <div className="flex flex-col">
           <div className="my-1 px-2 text-sm font-semibold text-muted-foreground">
             Color
           </div>
-          {TEXT_COLORS.map(({ name, color }, index) => (
+          {TEXT_COLORS.map(({ name, color }) => (
             <EditorBubbleItem
-              key={index}
+              key={name}
               onSelect={() => {
                 editor.commands.unsetColor();
-                if (name !== "Default") {
+                name !== "Default" &&
                   editor
                     .chain()
                     .focus()
                     .setColor(color || "")
                     .run();
-                }
                 onOpenChange(false);
               }}
               className="flex cursor-pointer items-center justify-between px-2 py-1 text-sm hover:bg-accent"
@@ -166,14 +165,13 @@ export const ColorSelector = ({ open, onOpenChange }: ColorSelectorProps) => {
           <div className="my-1 px-2 text-sm font-semibold text-muted-foreground">
             Background
           </div>
-          {HIGHLIGHT_COLORS.map(({ name, color }, index) => (
+          {HIGHLIGHT_COLORS.map(({ name, color }) => (
             <EditorBubbleItem
-              key={index}
+              key={name}
               onSelect={() => {
                 editor.commands.unsetHighlight();
-                if (name !== "Default") {
+                name !== "Default" &&
                   editor.chain().focus().setHighlight({ color }).run();
-                }
                 onOpenChange(false);
               }}
               className="flex cursor-pointer items-center justify-between px-2 py-1 text-sm hover:bg-accent"

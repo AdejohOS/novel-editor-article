@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { useState } from "react";
@@ -31,6 +32,7 @@ import { ColorSelector } from "@/components/editor/selectors/color-selector";
 import { Separator } from "@/components/ui/separator";
 
 import hljs from "highlight.js";
+import "highlight.js/styles/github-dark.css";
 
 const extensions = [...defaultExtensions, slashCommand];
 
@@ -46,7 +48,7 @@ export const defaultEditorContent = {
 
 interface EditorProps {
   initialValue?: JSONContent;
-  onChange: (content: JSONContent) => void;
+  onChange: (content: string) => void;
 }
 
 export default function Editor({ initialValue, onChange }: EditorProps) {
@@ -56,11 +58,10 @@ export default function Editor({ initialValue, onChange }: EditorProps) {
   const [openAI, setOpenAI] = useState(false);
 
   //Apply Codeblock Highlighting on the HTML from editor.getHTML()
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const highlightCodeblocks = (content: string) => {
     const doc = new DOMParser().parseFromString(content, "text/html");
     doc.querySelectorAll("pre code").forEach((el) => {
-      // @ts-expect-error error
+      // @ts-expect-error-error
       // https://highlightjs.readthedocs.io/en/latest/api.html?highlight=highlightElement#highlightelement
       hljs.highlightElement(el);
     });
@@ -89,7 +90,7 @@ export default function Editor({ initialValue, onChange }: EditorProps) {
             },
           }}
           onUpdate={({ editor }) => {
-            onChange(editor.getJSON());
+            onChange(editor.getHTML());
           }}
           slotAfter={<ImageResizer />}
         >

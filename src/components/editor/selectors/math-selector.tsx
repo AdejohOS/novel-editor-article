@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { SigmaIcon } from "lucide-react";

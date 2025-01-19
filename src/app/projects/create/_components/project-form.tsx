@@ -10,7 +10,6 @@ import { createProjectAction } from "@/actions/action";
 import { ActionResponse } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
-import { JSONContent } from "novel";
 import dynamic from "next/dynamic";
 
 const initialState: ActionResponse = {
@@ -18,7 +17,7 @@ const initialState: ActionResponse = {
   message: "",
 };
 
-export const defaultValue: JSONContent = {
+export const defaultValue = {
   type: "doc",
   content: [
     {
@@ -38,7 +37,7 @@ const Editor = dynamic(() => import("@/components/editor/editor"), {
 });
 
 export default function ProjectForm() {
-  const [content, setContent] = useState<JSONContent>(defaultValue);
+  const [content, setContent] = useState<string>("");
 
   const [state, formAction, isPending] = useActionState(
     createProjectAction,
@@ -102,15 +101,10 @@ export default function ProjectForm() {
         </div>
         <div className="space-y-2">
           <Label htmlFor="content">Description</Label>
-          <div className="prose prose-stone">
+          <div className="">
             <Editor initialValue={defaultValue} onChange={setContent} />
 
-            <Input
-              id="content"
-              type="hidden"
-              name="content"
-              value={JSON.stringify(content)}
-            />
+            <Input id="content" type="hidden" name="content" value={content} />
           </div>
         </div>
 
