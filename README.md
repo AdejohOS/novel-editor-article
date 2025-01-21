@@ -15,4 +15,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Novel Editor
 
-This a rich text editor (WYSIWYG), it supports formatting options like bold, italic, headings, lists, links and more. Lear more from official [documentation](https://www.novel.sh)
+This a rich text editor (WYSIWYG), it supports formatting options like bold, italic, headings, lists, links and more. Learn more from tthe official [documentation](https://www.novel.sh)
